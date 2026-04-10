@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+  <title>Jovens Cultivadores – Cultivando o futuro juntos</title>
+  <meta name="description" content="Projeto de horta comunitária que une jovens, famílias e professores em torno da agricultura urbana desde 2018. Conheça nossas ações, hortas e como participar.">
+  <meta name="keywords" content="horta comunitária, agricultura urbana, sustentabilidade, jovens cultivadores, voluntariado">
+  <meta name="author" content="Jovens Cultivadores">
+  <meta property="og:title" content="Jovens Cultivadores – Cultivando o futuro juntos">
+  <meta property="og:description" content="Projeto de horta comunitária que une jovens, famílias e professores em torno da agricultura urbana.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="theme-color" content="#2e7d32">
+
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --secondary: #f1f8e9;
+      --accent: #ff7043;
+      --text-dark: #333;
+      --text-light: #fff;
+      --bg: #fafafa;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+      margin: 0;
+    }
+    body.dark {
+      --primary: #1b5e20;
+      --secondary: #2c2c2c;
+      --text-dark: #eee;
+      --bg: #121212;
+    }
+
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #388e3c);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+    header h1 { font-size: 2.5rem; margin-bottom: 0.25rem; }
+    header p { margin-top: 0; opacity: .95; }
+    #darkModeToggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      border: none;
+      color: var(--text-light);
+      padding: 0.45rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+
+    nav {
+      background-color: var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    #menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 0.6rem 1rem;
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0.5rem;
+    }
+    nav li { margin: 0.25rem 0.75rem; }
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.45rem 0.85rem;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.15s;
+    }
+    nav a:hover { background: var(--accent); transform: scale(1.05); }
+
+
+    .skip-link {
+      position: absolute;
+      top: -999px;
+      left: 0;
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem 1rem;
+      z-index: 9999;
+      border-radius: 0 0 8px 0;
+    }
+    .skip-link:focus { top: 0; }
+
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                url("https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=1350&q=80") center/cover;
+      color: var(--text-light);
+      text-align: center;
+      padding: 4.5rem 2rem;
+      border-radius: 0 0 20px 20px;
+    }
+    .container { max-width: 1200px; margin: auto; padding: 2rem 1rem; }
+    .section { margin: 3rem 0; }
+    .section h2 { text-align: center; color: var(--primary); margin-bottom: 1rem; font-size: 1.9rem; }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--secondary);
+      border-radius: 10px;
+      padding: 1rem;
+      flex: 1 1 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 8px 18px rgba(0,0,0,0.14); }
+
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 0.9rem;
+      object-fit: cover;
+      height: 180px;
+      /* Placeholder enquanto a imagem carrega */
+      background-color: #c8e6c9;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.25s;
+      background-color: #c8e6c9;
+    }
+    .gallery img:hover { transform: scale(1.05); }
+    .counter { text-align: center; font-size: 2rem; font-weight: 700; margin: 0.5rem 0; }
+    details {
+      background: var(--secondary);
+      margin: 0.5rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: white;
+      color: inherit;
+      box-sizing: border-box;
+    }
+
+
+    form input:invalid:not(:placeholder-shown),
+    form textarea:invalid:not(:placeholder-shown),
+    form select:invalid:not(:placeholder-shown) {
+      border-color: #e53935;
+    }
+    form input:valid:not(:placeholder-shown),
+    form select.valid {
+      border-color: #43a047;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.7rem 1.25rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.15s;
+    }
+    .btn:hover { background: #e64a19; transform: translateY(-3px); }
+    footer {
+      background: var(--primary);
+      color: var(--text-light);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-top: 4px solid var(--accent);
+    }
+    .partner-logo { height: 70px; margin: 0.6rem; filter: grayscale(100%); transition: filter 0.25s; }
+    .partner-logo:hover { filter: grayscale(0%); }
+
+
+    .highlighted-card {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: 2px solid var(--accent);
+    }
+    .highlighted-card h3 {
+      color: #ffffff;
+    }
+    .highlighted-card p {
+      color: #e8f5e9;
+    }
+
+
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #2e7d32;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.2s;
+      z-index: 500;
+      pointer-events: none;
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: auto; }
+    #back-to-top:hover { transform: translateY(-3px); }
+
+    .card blockquote {
+      font-style: italic;
+      border-left: 4px solid var(--primary);
+      padding-left: 1rem;
+      margin: 0;
+    }
+
+    .card blockquote footer {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .horta-card address { font-style: normal; }
+    .horta-card a.maps-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .highlighted-card a.maps-link { color: #a5d6a7; }
+
+    @media (max-width: 768px) {
+      #menu-toggle { display: block; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 0.5rem;
+      }
+      nav ul.open { display: flex; }
+      .nav-inner { flex-direction: column; align-items: stretch; }
+      .card img { height: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <header>
+
+    <h1>Jovens Cultivadores</h1>
+    <p>Cultivando o futuro juntos</p>
+    <button id="darkModeToggle" type="button" aria-label="Alternar modo escuro">🌙 Modo Escuro</button>
+  </header>
+
+
+  <nav aria-label="Menu principal">
+    <div class="nav-inner">
+      <button id="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-list" aria-label="Abrir menu">☰</button>
+      <ul id="nav-list" role="list">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#acoes">Ações</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#impacto">Impacto</a></li>
+        <li><a href="#contador">Números</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#agenda">Agenda</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#hortas-enderecos">Nossas Hortas</a></li>
+        <li><a href="#parceiros">Parceiros</a></li>
+        <li><a href="#doacoes">Doações</a></li>
+        <li><a href="#voluntario">Voluntário</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <section class="hero" role="region" aria-label="Chamada principal">
+    <h2>Um projeto para transformar vidas</h2>
+    <p>Com a força da comunidade, cultivamos alimentos e esperança.</p>
+    <a href="#contato" class="btn">Participe</a>
+  </section>
+
+
+  <main id="main-content">
+    <div class="container">
+
+      <section id="sobre" class="section" aria-labelledby="sobre-titulo">
+        <h2 id="sobre-titulo">Sobre</h2>
+        <!-- ✅ MELHORIA: article para conteúdo independente -->
+        <article>
+          <p>Nosso projeto de horta comunitária nasceu em 2018 com a ideia de unir jovens, famílias e professores em torno da agricultura urbana.</p>
+        </article>
+      </section>
+
+      <section id="acoes" class="section" aria-labelledby="acoes-titulo">
+        <h2 id="acoes-titulo">Nossas Ações</h2>
+        <div class="card-container">
+          <div class="card">
+
+            <img src="https://i.ibb.co/B2FnTyhW/CUIDADO-COM-AS-PLANTAS.jpg"
+                 alt="Estudante cuidando das plantas na horta comunitária"
+                 loading="lazy" width="400" height="180">
+            <h3>Cuidado com as Plantas</h3>
+            <p>Manutenção diária da horta pelos estudantes.</p>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=75"
+                 alt="Aula prática de cultivo e sustentabilidade"
+                 loading="lazy" width="400" height="180">
+            <h3>Aulas Práticas</h3>
+            <p>Aprendizado sobre cultivo e sustentabilidade.</p>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=800&q=75"
+                 alt="Colheita comunitária com distribuição de alimentos frescos"
+                 loading="lazy" width="400" height="180">
+            <h3>Colheita Comunitária</h3>
+            <p>Distribuição de alimentos frescos entre os participantes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="galeria" class="section" aria-labelledby="galeria-titulo">
+        <h2 id="galeria-titulo">Galeria</h2>
+
+        <div class="gallery" role="list" aria-label="Galeria de fotos do projeto">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=75"
+               alt="Voluntários plantando juntos na horta comunitária"
+               loading="lazy" width="400" height="200">
+          <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=75"
+               alt="Crianças ajudando na horta e aprendendo sobre cultivo"
+               loading="lazy" width="400" height="200">
+          <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=75"
+               alt="Processo de compostagem comunitária"
+               loading="lazy" width="400" height="200">
+          <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=75"
+               alt="Colheita saudável de vegetais frescos"
+               loading="lazy" width="400" height="200">
+        </div>
+      </section>
+
+      <section id="impacto" class="section" aria-labelledby="impacto-titulo">
+        <h2 id="impacto-titulo">Impacto</h2>
+        <div class="card-container">
+          <div class="card"><h3>+500 famílias atendidas</h3></div>
+          <div class="card"><h3>+100 alunos participantes</h3></div>
+          <div class="card"><h3>15 hortas implantadas</h3></div>
+        </div>
+      </section>
+
+      <!-- ✅ MELHORIA: IntersectionObserver no contador – animação só dispara quando visível -->
+      <section id="contador" class="section" aria-labelledby="contador-titulo">
+        <h2 id="contador-titulo">Nossos Números</h2>
+        <div class="card-container">
+          <div class="card">
+            <p>Alimentos Distribuídos</p>
+            <div class="counter" data-target="12000" aria-label="12000 alimentos distribuídos">0</div>
+          </div>
+          <div class="card">
+            <p>Voluntários</p>
+            <div class="counter" data-target="250" aria-label="250 voluntários">0</div>
+          </div>
+          <div class="card">
+            <p>Eventos Realizados</p>
+            <div class="counter" data-target="80" aria-label="80 eventos realizados">0</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="depoimentos" class="section" aria-labelledby="depoimentos-titulo">
+        <h2 id="depoimentos-titulo">Depoimentos</h2>
+        <div class="card-container">
+
+          <div class="card">
+            <blockquote>
+              <p>"Participar da horta mudou minha visão sobre sustentabilidade."</p>
+              <footer>— <cite>Maria, estudante</cite></footer>
+            </blockquote>
+          </div>
+          <div class="card">
+            <blockquote>
+              <p>"Agora temos alimentos frescos na comunidade."</p>
+              <footer>— <cite>João, morador</cite></footer>
+            </blockquote>
+          </div>
+          <div class="card">
+            <blockquote>
+              <p>"Aprendi muito sobre agricultura urbana."</p>
+              <footer>— <cite>Ana, voluntária</cite></footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- ✅ MELHORIA: time element com datetime para datas de eventos -->
+      <section id="agenda" class="section" aria-labelledby="agenda-titulo">
+        <h2 id="agenda-titulo">Agenda de Eventos</h2>
+        <div class="card-container">
+          <div class="card">
+            <h3>Oficina de Compostagem</h3>
+            <p><time datetime="2025-10-12">12 de Outubro</time> – Escola Municipal</p>
+          </div>
+          <div class="card">
+            <h3>Mutirão de Plantio</h3>
+            <p><time datetime="2025-10-25">25 de Outubro</time> – Praça Central</p>
+          </div>
+          <div class="card">
+            <h3>Feira da Colheita</h3>
+            <p><time datetime="2025-11-10">10 de Novembro</time> – Comunidade São José</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-titulo">
+        <h2 id="faq-titulo">FAQ</h2>
+        <details>
+          <summary>Como posso participar?</summary>
+          <p>Você pode se inscrever como voluntário ou doar para o projeto.</p>
+        </details>
+        <details>
+          <summary>Onde fica a horta?</summary>
+          <p>Nossas hortas estão espalhadas em várias comunidades. Veja a lista abaixo!</p>
+        </details>
+        <details>
+          <summary>As atividades são gratuitas?</summary>
+          <p>Sim, todas as atividades educativas e comunitárias são gratuitas.</p>
+        </details>
+      </section>
+
+      <!-- ✅ MELHORIA: Endereços com address semântico e link para Google Maps -->
+      <section id="hortas-enderecos" class="section" aria-labelledby="hortas-titulo">
+        <h2 id="hortas-titulo">Nossas Hortas</h2>
+        <div class="card-container" id="hortas-list">
+          <div class="card horta-card">
+            <h3>Horta Comunitária CIC Oeste</h3>
+            <address>Rua Padre Gastão, 123 – Curitiba, PR</address>
+            <p>Referência em agricultura comunitária.</p>
+            <a class="maps-link"
+               href="https://www.google.com/maps/search/?api=1&query=Rua+Padre+Gast%C3%A3o+123+Curitiba+PR"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Ver Horta CIC Oeste no Google Maps">📍 Ver no mapa</a>
+          </div>
+          <div class="card horta-card">
+            <h3>Horta Vila Nova Esperança</h3>
+            <address>Avenida das Flores, 456 – São Paulo, SP</address>
+            <p>Projeto comunitário com foco em agroecologia.</p>
+            <a class="maps-link"
+               href="https://www.google.com/maps/search/?api=1&query=Avenida+das+Flores+456+S%C3%A3o+Paulo+SP"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Ver Horta Vila Nova Esperança no Google Maps">📍 Ver no mapa</a>
+          </div>
+          <div class="card horta-card">
+            <h3>Horta Vila Bancária Munhoz</h3>
+            <address>Rua General Ulhoa Cintra, 37 – São Paulo, SP</address>
+            <p>Espaço de cultivo e aprendizado para a comunidade.</p>
+            <a class="maps-link"
+               href="https://www.google.com/maps/search/?api=1&query=Rua+General+Ulhoa+Cintra+37+S%C3%A3o+Paulo+SP"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Ver Horta Vila Bancária no Google Maps">📍 Ver no mapa</a>
+          </div>
+          <div class="card horta-card">
+            <h3>Horta do Bairro Verde</h3>
+            <address>Travessa da Horta, 10 – Rio de Janeiro, RJ</address>
+            <p>Iniciativa de revitalização urbana e produção de alimentos.</p>
+            <a class="maps-link"
+               href="https://www.google.com/maps/search/?api=1&query=Travessa+da+Horta+10+Rio+de+Janeiro+RJ"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Ver Horta do Bairro Verde no Google Maps">📍 Ver no mapa</a>
+          </div>
+          <div class="card horta-card">
+            <h3>Horta Sol Nascente</h3>
+            <address>Rua do Sol, 200 – Belo Horizonte, MG</address>
+            <p>Promovendo a segurança alimentar e a educação ambiental.</p>
+            <a class="maps-link"
+               href="https://www.google.com/maps/search/?api=1&query=Rua+do+Sol+200+Belo+Horizonte+MG"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Ver Horta Sol Nascente no Google Maps">📍 Ver no mapa</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="parceiros" class="section" aria-labelledby="parceiros-titulo">
+        <h2 id="parceiros-titulo">Parceiros</h2>
+        <div class="card-container">
+          <img src="https://i.ibb.co/MypgdZFc/PARCEIRO-3.png" alt="Logo do Parceiro 1" class="partner-logo" loading="lazy">
+          <img src="https://i.ibb.co/Zzmn3098/PARCEIRO-2.jpg" alt="Logo do Parceiro 2" class="partner-logo" loading="lazy">
+        </div>
+      </section>
+
+      <section id="doacoes" class="section" aria-labelledby="doacoes-titulo">
+        <h2 id="doacoes-titulo">Doações</h2>
+        <p>Ajude o projeto Jovens Cultivadores a continuar transformando vidas. Escolha a forma de contribuir:</p>
+        <div class="card-container">
+          <div class="card">
+            <h3>PIX</h3>
+            <!-- ✅ MELHORIA: aria-expanded para acessibilidade dos botões de toggle -->
+            <button type="button" class="btn" onclick="mostrarPix(this)" aria-expanded="false" aria-controls="pixDados">Mostrar Chave PIX</button>
+            <p id="pixDados" style="display:none; margin-top:0.8rem;" aria-live="polite">
+              Chave PIX: <strong>123e4567-e89b-12d3-a456-426614174000</strong>
+            </p>
+          </div>
+          <div class="card">
+            <h3>Depósito Bancário</h3>
+            <button type="button" class="btn" onclick="mostrarBanco(this)" aria-expanded="false" aria-controls="bancoDados">Mostrar Dados Bancários</button>
+            <p id="bancoDados" style="display:none; margin-top:0.8rem;" aria-live="polite">
+              Banco Fictício 123<br>
+              Agência: 0001<br>
+              Conta: 12345-6
+            </p>
+          </div>
+          <div class="card">
+            <h3>PayPal</h3>
+            <!-- ✅ MELHORIA: aviso antes de redirecionar (rel="noopener") -->
+            <button type="button" class="btn" onclick="doarPaypal()">Doar com PayPal</button>
+            <p id="paypalDados" style="display:none; margin-top:0.8rem;" aria-live="polite">
+              Você será redirecionado para a página de doação do PayPal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ✅ MELHORIA: Formulários com integração via Formspree, labels explícitas e validação -->
+      <section id="voluntario" class="section" aria-labelledby="voluntario-titulo">
+        <h2 id="voluntario-titulo">Seja Voluntário</h2>
+        <form id="form-voluntario" action="https://formspree.io/f/maqllnzz" method="POST" novalidate>
+
+          <label for="vol-nome">Nome completo *</label>
+          <input type="text" id="vol-nome" name="nome" placeholder="Seu nome completo" required autocomplete="name">
+
+          <label for="vol-email">E-mail *</label>
+          <input type="email" id="vol-email" name="email" placeholder="seu@email.com" required autocomplete="email">
+
+          <label for="vol-area">Área de Interesse *</label>
+          <select id="vol-area" name="area" required>
+            <option value="">Selecione uma área</option>
+            <option value="plantio">Plantio</option>
+            <option value="educacao">Educação</option>
+            <option value="distribuicao">Distribuição</option>
+          </select>
+
+
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <button type="submit" class="btn">Quero Ajudar</button>
+          <p id="vol-status" role="alert" aria-live="assertive" style="margin-top:0.5rem;"></p>
+        </form>
+      </section>
+
+      <section id="contato" class="section" aria-labelledby="contato-titulo">
+        <h2 id="contato-titulo">Entre em Contato</h2>
+        <form id="form-contato" action="https://formspree.io/f/xdappegg" method="POST" novalidate>
+
+          <label for="ct-nome">Seu nome *</label>
+          <input type="text" id="ct-nome" name="nome" placeholder="Seu nome" required autocomplete="name">
+
+          <label for="ct-email">Seu e-mail *</label>
+          <input type="email" id="ct-email" name="email" placeholder="seu@email.com" required autocomplete="email">
+
+          <label for="ct-msg">Mensagem</label>
+          <textarea id="ct-msg" name="mensagem" placeholder="Sua mensagem" rows="5"></textarea>
+
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <button type="submit" class="btn">Enviar</button>
+          <p id="ct-status" role="alert" aria-live="assertive" style="margin-top:0.5rem;"></p>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Jovens Cultivadores – Todos os direitos reservados</p>
+  </footer>
+
+  <!-- ✅ MELHORIA: Toast de feedback -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ✅ MELHORIA: Botão voltar ao topo -->
+  <button id="back-to-top" type="button" aria-label="Voltar ao topo da página" title="Voltar ao topo">↑</button>
+
+  <script>
+    // ─── Dark Mode ──────────────────────────────────────────────
+    const toggle = document.getElementById("darkModeToggle");
+    const getPreferredTheme = () => {
+      const saved = localStorage.getItem("theme");
+      if (saved) return saved;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    };
+
+    const applyTheme = (theme) => {
+      const isDark = theme === "dark";
+      document.body.classList.toggle("dark", isDark);
+      toggle.textContent = isDark ? "☀️ Modo Claro" : "🌙 Modo Escuro";
+      toggle.setAttribute("aria-label", isDark ? "Ativar modo claro" : "Ativar modo escuro");
+      localStorage.setItem("theme", theme);
+    };
+
+    applyTheme(getPreferredTheme());
+
+    toggle.addEventListener("click", () => {
+      applyTheme(document.body.classList.contains("dark") ? "light" : "dark");
+    });
+
+    // ─── Menu hambúrguer mobile ──────────────────────────────────
+    const menuToggle = document.getElementById("menu-toggle");
+    const navList = document.getElementById("nav-list");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navList.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+    // Fechar menu ao clicar em um link
+    navList.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navList.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // ─── PIX e Banco (com aria-expanded) ────────────────────────
+    function mostrarPix(btn) {
+      const el = document.getElementById("pixDados");
+      const visible = el.style.display === "none";
+      el.style.display = visible ? "block" : "none";
+      btn.setAttribute("aria-expanded", visible);
+      btn.textContent = visible ? "Ocultar Chave PIX" : "Mostrar Chave PIX";
+    }
+    function mostrarBanco(btn) {
+      const el = document.getElementById("bancoDados");
+      const visible = el.style.display === "none";
+      el.style.display = visible ? "block" : "none";
+      btn.setAttribute("aria-expanded", visible);
+      btn.textContent = visible ? "Ocultar Dados Bancários" : "Mostrar Dados Bancários";
+    }
+    function doarPaypal() {
+      // ✅ IMPORTANTE: Substitua pelo seu link real de doação do PayPal
+      // Gere em: paypal.com > Ferramentas > Botões do PayPal > Criar novo botão > Doações
+      window.open("https://www.paypal.com/donate/?hosted_button_id=SEU_ID_PAYPAL_AQUI", "_blank", "noopener,noreferrer");
+    }
+
+    // ─── Toast de feedback ───────────────────────────────────────
+    function showToast(msg, sucesso = true) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.style.background = sucesso ? "#2e7d32" : "#c62828";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3500);
+    }
+
+    // ─── Formulários com Formspree ───────────────────────────────
+    function setupForm(formId, statusId) {
+      const form = document.getElementById(formId);
+      const status = document.getElementById(statusId);
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector("[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Enviando...";
+        status.textContent = "";
+
+        try {
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" }
+          });
+          if (res.ok) {
+            status.style.color = "#2e7d32";
+            status.textContent = "✅ Mensagem enviada com sucesso! Entraremos em contato em breve.";
+            form.reset();
+            showToast("Mensagem enviada com sucesso! 🌱");
+          } else {
+            throw new Error("Erro no envio");
+          }
+        } catch {
+          status.style.color = "#c62828";
+          status.textContent = "❌ Não foi possível enviar. Tente novamente ou envie um e-mail diretamente.";
+          showToast("Erro ao enviar. Tente novamente.", false);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = formId === "form-voluntario" ? "Quero Ajudar" : "Enviar";
+        }
+      });
+    }
+    setupForm("form-voluntario", "vol-status");
+    setupForm("form-contato", "ct-status");
+
+    // ─── Contador com IntersectionObserver ──────────────────────
+    // ✅ MELHORIA: animação só dispara quando os contadores entram na tela
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || entry.target.dataset.done) return;
+        entry.target.dataset.done = "1";
+        const target = +entry.target.getAttribute('data-target');
+        const updateCount = () => {
+          const count = +entry.target.innerText;
+          const increment = Math.max(1, Math.floor(target / 200));
+          if (count < target) {
+            entry.target.innerText = Math.min(target, count + increment);
+            setTimeout(updateCount, 20);
+          } else {
+            entry.target.innerText = target.toLocaleString('pt-BR');
+          }
+        };
+        updateCount();
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(c => counterObserver.observe(c));
+
+    // ─── Destaque dos cards de horta ────────────────────────────
+    const hortaCards = document.querySelectorAll('.horta-card');
+    hortaCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Não disparar o toggle se o clique foi no link do mapa
+        if (e.target.tagName === 'A') return;
+        hortaCards.forEach(other => {
+          if (other !== card) other.classList.remove('highlighted-card');
+        });
+        card.classList.toggle('highlighted-card');
+      });
+    });
+
+    // ─── Botão voltar ao topo ────────────────────────────────────
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("visible", window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
